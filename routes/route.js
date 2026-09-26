@@ -7,7 +7,7 @@ const router = express.Router();
 // MIDDLEWARE
 // =====================================================
 
-const { auth, isOwner } = require("../middlewares/auth.js");
+const { auth, isOwner, isTenant } = require("../middlewares/auth.js");
 
 // =====================================================
 // AUTH CONTROLLERS
@@ -111,7 +111,6 @@ router.post(
 router.get(
     "/getcomplex",
     auth,
-    isOwner,
     getMyComplexes
 );
 
@@ -281,4 +280,17 @@ router.get(
   getVacantRoomsByFloor
 );
 
+
+
+
+const {
+  getMyTenantDetails,
+} = require("../controllers/tenantsControllers/getMyTenantDetails.js");
+
+router.get(
+  "/tenant/:complexId/me",
+  auth,
+  isTenant,
+  getMyTenantDetails
+);
 module.exports = router;

@@ -9,6 +9,7 @@ module.exports = {
   Tenancy: require('./Tenancy'),
   RentPayment: require('./RentPayment'),
   MeterReading: require('./MeterReading'),
+  ElectricityReading: require('./MeterReading'),
   MaintenanceCharge: require('./MaintenanceCharge'),
   Expense: require('./Expense'),
   Notice: require('./Notice'),
