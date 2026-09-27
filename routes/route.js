@@ -293,4 +293,62 @@ router.get(
   isTenant,
   getMyTenantDetails
 );
+
+
+
+const {
+  getRentByComplex,
+} = require("../controllers/rent/getRentByComplex");
+
+const {
+  generateRentForMonth,
+} = require("../controllers/rent/generateRent");
+
+const {
+  markRentAsPaid,
+} = require("../controllers/rent/markRentPaid");
+
+const {
+  getMyRent,
+} = require("../controllers/rent/getMyRent");
+
+// =====================================================
+// OWNER
+// =====================================================
+
+// Get rent for complex
+router.get(
+  "/rents/:complexId",
+  auth,
+  isOwner,
+  getRentByComplex
+);
+
+// Generate rent for a month
+router.post(
+  "/rents/:complexId/generate",
+  auth,
+  isOwner,
+  generateRentForMonth
+);
+
+// Mark rent as paid
+router.patch(
+  "/rent/:rentId/paid",
+  auth,
+  isOwner,
+  markRentAsPaid
+);
+
+// =====================================================
+// TENANT
+// =====================================================
+
+// Logged-in tenant rent
+router.get(
+  "/tenant/rents",
+  auth,
+  isTenant,
+  getMyRent
+);
 module.exports = router;
